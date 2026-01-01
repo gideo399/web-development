@@ -1,0 +1,1 @@
+NumberOfRuns = document.querySelectorAll(".drum").length
