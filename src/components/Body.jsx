@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 const Body = () => {
   const [activity, setActivity] = useState(null);
 
   useEffect(() => {
     axios
-      .get('https://bored-api.appbrewery.com/random')
+      .get('https://api.thecatapi.com/v1/images/search')
       .then(response => {
-        setActivity(response.data);
+        // API returns an array — take the first item
+        setActivity(response.data[0]);
+      })
+      .catch(error => {
+        console.error('Error fetching cat image:', error);
       });
   }, []);
 
@@ -17,9 +20,15 @@ const Body = () => {
     <div className="bg-red-500">
       <h1>The header</h1>
 
-      <p>{activity?.activity}</p>
-      <p>Type: {activity?.type}</p>
-      <p>Participants: {activity?.participants}</p>
+      {/* Guard against null before accessing properties */}
+      {activity ? (
+        <>
+          <p>ID: {activity.id}</p>
+          <img src={activity.url} alt="Random cat" width="300" />
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
