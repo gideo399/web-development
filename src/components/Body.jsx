@@ -17,14 +17,15 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="bg-red-500">
-      <h1>The header</h1>
+    <div className="flex   ">
+
+           <p className='text-2xl text-shadow-black flex justify-center items-center '>This is an image generation api </p>
 
       {/* Guard against null before accessing properties */}
       {activity ? (
         <>
-          <p>ID: {activity.id}</p>
-          <img src={activity.url} alt="Random cat" width="300" />
+         
+          <img src={activity.url} alt="Random cat" width="300" className='flex justify-center items-center pt-12' />
         </>
       ) : (
         <p>Loading...</p>
